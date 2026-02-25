@@ -87,7 +87,7 @@ python setup_project.py
 ```
 
 This will:
-- Create admin superuser (username: `admin`, password: `admin123`)
+- Create admin superuser (username: `shariqueperwez`, password: `perwez@#belA786`)
 - Create service categories
 - Create sample blog post
 
@@ -104,8 +104,8 @@ The website will be available at: **http://localhost:8000**
 Access admin panel at: **http://localhost:8000/admin**
 
 **Login Credentials:**
-- Username: `admin`
-- Password: `admin123`
+- Username: `shariqueperwez`
+- Password: `perwez@#belA786`
 
 ## Usage
 
@@ -236,6 +236,8 @@ Before deploying to production:
 5. Set up email backend for form notifications
 6. Use a production WSGI server (Gunicorn)
 7. Set up static file serving (CDN or whitenoise)
+
+For Render deployment, `render.yaml` now runs migrations and `setup_project.py` in the build step, so the default admin user and seed data are created/updated in PostgreSQL automatically.
 
 ## Development Tips
 

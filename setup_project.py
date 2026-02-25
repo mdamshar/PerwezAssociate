@@ -16,9 +16,9 @@ from django.contrib.auth.models import User
 from home.models import Category
 from blog.models import BlogPost
 
-DEFAULT_ADMIN_USERNAME = 'shariqueperwez'
-DEFAULT_ADMIN_EMAIL = 'shariqueperwez3@gmail.com'
-DEFAULT_ADMIN_PASSWORD = 'perwez@#belA786'
+DEFAULT_ADMIN_USERNAME = os.getenv('DEFAULT_ADMIN_USERNAME', 'shariqueperwez')
+DEFAULT_ADMIN_EMAIL = os.getenv('DEFAULT_ADMIN_EMAIL', 'shariqueperwez3@gmail.com')
+DEFAULT_ADMIN_PASSWORD = os.getenv('DEFAULT_ADMIN_PASSWORD', 'perwez@#belA786')
 
 def setup_superuser():
     """Create superuser if not exists"""
