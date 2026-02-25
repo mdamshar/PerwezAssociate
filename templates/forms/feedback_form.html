@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Feedback - Perwez Associate{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center mb-4">Send Us Your Feedback</h1>
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <p class="text-muted text-center mb-4">We appreciate your feedback and suggestions to help us improve our services.</p>
+                    <form method="POST" class="feedback-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary w-100 fw-bold mt-3">Submit Feedback</button>
+                    </form>
+                    <hr class="my-4">
+                    <div class="text-center">
+                        <p class="text-muted mb-2">Have questions? Reach out to us directly!</p>
+                        <p class="text-muted">
+                            <i class="fas fa-envelope"></i> 
+                            <a href="mailto:perwezassociate.work@gmail.com" class="text-decoration-none">perwezassociate.work@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

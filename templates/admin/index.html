@@ -1,0 +1,203 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block title %}Perwez Associate - Admin Dashboard{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<style>
+    .dashboard-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .welcome-section {
+        margin-bottom: 30px;
+    }
+    
+    .welcome-section h1 {
+        font-size: 2rem;
+        margin: 0 0 8px 0;
+        color: var(--text);
+    }
+    
+    .welcome-section p {
+        color: var(--text-light);
+        margin: 0;
+        font-size: 15px;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stat-label {
+        color: var(--text-light);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 20px;
+    }
+    
+    .feature-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .feature-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 10px 0;
+        color: var(--text);
+    }
+    
+    .feature-description {
+        color: var(--text-light);
+        font-size: 13px;
+        margin-bottom: 15px;
+        flex-grow: 1;
+    }
+    
+    .feature-count {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+    
+    .feature-link {
+        display: inline-block;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        border: 1px solid var(--primary);
+    }
+    
+    .feature-link:hover {
+        background: var(--primary);
+        color: var(--white);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="welcome-section">
+        <h1>Welcome back, {{ user.first_name|default:user.username }}!</h1>
+        <p>Manage your Perwez Associate business seamlessly</p>
+    </div>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">📝 Blog Posts</div>
+            <div class="stat-value">{{ blog_count }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">🏢 Portfolio Items</div>
+            <div class="stat-value">{{ portfolio_count }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">💬 Quote Requests</div>
+            <div class="stat-value">{{ quote_count }}</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">📧 Feedback</div>
+            <div class="stat-value">{{ feedback_count }}</div>
+        </div>
+    </div>
+    
+    <div class="cards-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3 class="feature-title">Blog Posts</h3>
+            <p class="feature-description">Create, edit, and manage blog posts with images and descriptions</p>
+            <div class="feature-count">{{ blog_count }}</div>
+            <a href="/admin/blog/blogpost/" class="feature-link">Manage Posts</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🏗️</div>
+            <h3 class="feature-title">Project Portfolio</h3>
+            <p class="feature-description">Upload and manage your project portfolio and case studies</p>
+            <div class="feature-count">{{ portfolio_count }}</div>
+            <a href="/admin/home/portfolio/" class="feature-link">View Projects</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">💼</div>
+            <h3 class="feature-title">Quote Requests</h3>
+            <p class="feature-description">View and manage customer quote requests with export to Excel</p>
+            <div class="feature-count">{{ quote_count }}</div>
+            <a href="/admin/forms_app/quoterequest/" class="feature-link">View Quotes</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3 class="feature-title">Customer Feedback</h3>
+            <p class="feature-description">Review and respond to customer feedback and reviews</p>
+            <div class="feature-count">{{ feedback_count }}</div>
+            <a href="/admin/forms_app/feedback/" class="feature-link">View Feedback</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3 class="feature-title">Categories</h3>
+            <p class="feature-description">Manage service categories and portfolio categorization</p>
+            <a href="/admin/home/category/" class="feature-link">Manage Categories</a>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3 class="feature-title">Users</h3>
+            <p class="feature-description">Manage admin users and permissions</p>
+            <a href="/admin/auth/user/" class="feature-link">Manage Users</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

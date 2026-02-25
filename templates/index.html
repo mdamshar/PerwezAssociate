@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Perwez Associate{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=500&fit=crop'); background-size: cover; background-position: center; min-height: 600px; display: flex; align-items: center;">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold text-white mb-4">Transform Your Space Into Reality</h1>
+        <p class="lead text-white mb-4">Professional Construction, Interior Design & Project Management Services</p>
+        <a href="{% url 'forms:quote' %}" class="btn btn-warning btn-lg">Our Services</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h2 class="mb-3">About Perwez Associate</h2>
+                <p>We are a team of experienced professionals dedicated to delivering exceptional construction and interior design solutions. With years of expertise, we transform visions into stunning realities.</p>
+                <p>Our commitment to quality, innovation, and customer satisfaction sets us apart in the industry.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=500&h=400&fit=crop" alt="About Us" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Our Project Gallery</h2>
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <video width="100%" height="auto" controls class="rounded shadow">
+                    <source src="{% static 'images/section2.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="text-center mt-3">
+                    <a href="{% url 'gallery' %}" class="btn btn-primary">Watch More Project Gallery</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Services</h2>
+        <div class="row">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card service-card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-building text-warning" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h5 class="card-title">{{ service }}</h5>
+                        <p class="card-text text-muted">Professional {{ service|lower }} services tailored to your needs.</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Get Free Quote Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h2 class="text-center mb-4">Get Free Quote</h2>
+                <form method="POST" action="{% url 'forms:quote' %}" class="quote-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" placeholder="Phone Number" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" placeholder="Address" name="address" rows="2" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-control" name="topic" required>
+                            <option value="">Select Topic</option>
+                            <option value="residential">Residential Design</option>
+                            <option value="commercial">Commercial Design</option>
+                            <option value="hospitality">Hospitality Design</option>
+                            <option value="space_planning">Space Planning</option>
+                            <option value="working_drawing">Working Drawing</option>
+                            <option value="3d_visualization">3D Visualization</option>
+                            <option value="renovation">Renovation & Remodeling</option>
+                            <option value="interior_styling">Interior Styling</option>
+                            <option value="project_planning">Project Planning</option>
+                            <option value="general_contracting">General Contracting</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" placeholder="Your Message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Feedback Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center mb-4">
+                <h2 class="mb-3">We'd Love Your Feedback</h2>
+                <p class="text-muted">Help us improve by sharing your experience with us</p>
+                <a href="{% url 'forms:feedback' %}" class="btn btn-primary btn-lg">Contact Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
