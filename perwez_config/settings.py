@@ -177,3 +177,14 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
+    
+
+if os.environ.get("RENDER"):
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            username="shariqueperwez",
+            email="shariqueperwez3@gmail.com",
+            password="perwez@#belA786"
+        )
