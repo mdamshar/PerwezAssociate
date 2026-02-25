@@ -13,6 +13,20 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+u, created = User.objects.get_or_create(
+    username="shariqueperwez",
+    defaults={"email": "shariqueperwez3@gmail.com"},
+)
+u.email = "shariqueperwez3@gmail.com"
+u.is_staff = True
+u.is_superuser = True
+u.set_password("perwez@#belA786")
+u.save()
+
+print("created:", created, "id:", u.id, "staff:", u.is_staff, "superuser:", u.is_superuser)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
