@@ -1,5 +1,5 @@
 Django==5.2.11
-Pillow==10.0.0
+Pillow
 django-crispy-forms==2.3
 crispy-bootstrap5==2024.10
 openpyxl==3.1.5
